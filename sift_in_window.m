@@ -8,17 +8,17 @@ function [Theta, B] = sift_in_window(rect, set)
 % O = list of keypoints in the window
 
 % Get the four corners of the window
-x_min = rect(2);
-x_max = rect(2) + rect(4);
-y_min = rect(1);
-y_max = rect(1) + rect(4);
+x_min = rect(1);
+x_max = rect(1) + rect(3);
+y_min = rect(2);
+y_max = rect(2) + rect(4);
 
 % Check if keypoint in the window and keep it or not
 j = 0;
 n = 0;
 for i = 1:length(set)
-    if((set(i).x(2) > x_min) && (set(i).x(2)< x_max) && ...
-       (set(i).x(1) > y_min) && (set(i).x(1) < y_max))
+    if((set(i).x(1) > x_min) && (set(i).x(1)< x_max) && ...
+       (set(i).x(2) > y_min) && (set(i).x(2) < y_max))
         j = j + 1;
         Theta(j).x = set(i).x;
         Theta(j).v = set(i).v;
