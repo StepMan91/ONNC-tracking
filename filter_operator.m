@@ -7,9 +7,13 @@ function Fl = filter_operator(Theta, Okm1, B)
 % B = Background model
 
 lambda = 2/3;
-j = 0;
 for i = 1:length(Theta)
-    if(norm(v - nn_in_set(Okm1)) < lambda*norm(v - nn_in_set(B)))
-        Fl(:,j) = Theta(i).v;
+    v = Theta(i).v;
+    if(norm(double(v - nn_in_set(v, Okm1))) < lambda*norm(double(v - nn_in_set(v, B))))
+        Fl(i).v = v;
+
+    else
+        Fl(i).v = [];
     end
+    Fl(i).x = Theta(i).x;
 end
