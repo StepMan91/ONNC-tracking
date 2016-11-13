@@ -108,9 +108,10 @@ for k = 2:NumImages
 
 %% Step 3 : Find Appearance Object Model (Ok)
     
-    [v_Okm1, ~] = split_set(Okm1);
-    [v_Fl, ~] = split_set(Fl);
-    matches = vl_ubcmatch(v_Okm1, v_Fl);
+%     [v_Okm1, ~] = split_set(Okm1);
+%     [v_Fl, ~] = split_set(Fl);
+%     matches = vl_ubcmatch(v_Okm1, v_Fl);
+    Ok = or_set(Okm1, Fl);
     pause;
     
 end
