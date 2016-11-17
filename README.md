@@ -1,11 +1,14 @@
 #  Online Nearest Neighbor Classifier  -  Visual Tracking
  Best group :
  ```html
-<Armine  VARDAZARYAN   ```
+<Armine  VARDAZARYAN
+```
+```html
+<Yannick PORTO
+ ```
  ```html
-<Yannick PORTO  ```
- ```html
-<Bastien CASPANI  ``` 
+<Bastien CASPANI
+ ``` 
  MSc VIBOT & Computer Vision - 2016 - University of Burgundy
  
  
