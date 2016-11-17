@@ -3,7 +3,7 @@ group for the Visual tracking
 ```html
 Armine
 
--Bastien
+#FF0000 Bastien
 
 <Yannick
 
