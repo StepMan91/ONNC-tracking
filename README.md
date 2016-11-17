@@ -1,9 +1,9 @@
 # ONNC-tracking
 group for the Visual tracking
 ```html
-<Armine
+Armine
 
-<Bastien
+-Bastien
 
 <Yannick
 
