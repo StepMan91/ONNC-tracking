@@ -2,9 +2,8 @@
 group for the Visual tracking
 ```html
 <GROUP>
-< Armine
-< Bastien 
+<Armine
+<Bastien 
 <Yannick
 <\ >
 Just one try
-```
