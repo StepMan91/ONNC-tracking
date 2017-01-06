@@ -35,6 +35,6 @@ for i = 1:size(Fl,2)
    end
 end
 
-mu = sum_sign - motion_penalty(W, Wkm1);
+mu = sum_sign - 0*motion_penalty(W, Wkm1);
 
 

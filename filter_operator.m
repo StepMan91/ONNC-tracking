@@ -9,7 +9,7 @@ function Fl = filter_operator(Theta, Okm1, B)
 lambda = 2/3;
 for i = 1:length(Theta)
     v = Theta(i).v;
-    if(norm(double(v - nn_in_set(v, Okm1))) < lambda*norm(double(v - nn_in_set(v, B))))
+    if(norm(double(v - nn_in_set(v, Okm1, 'kd'))) < lambda*norm(double(v - nn_in_set(v, B, 'kd'))))
         Fl(i).v = v;
 
     else

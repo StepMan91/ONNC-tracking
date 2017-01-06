@@ -6,7 +6,6 @@ function [Theta, B] = sift_in_window(rect, set)
 % set = set of features with coordinates and descriptors of the sift
 % keypoints
 % Theta = list of keypoints in the window
-% B = remaining list of keypoints corresponding to the background
 
 % Get the four corners of the window
 x_min = rect(1);

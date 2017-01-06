@@ -24,15 +24,14 @@ VIDEO_WIDTH = size(I,2);
 VIDEO_HEIGHT = size(I,1);
 
 if(size(I,3)==3)
-    ImSeq = zeros(VIDEO_HEIGHT, VIDEO_WIDTH, NumImages);
+    ImSeq = zeros(VIDEO_HEIGHT, VIDEO_WIDTH, NumImages, 3);
 else
     ImSeq = zeros(VIDEO_HEIGHT, VIDEO_WIDTH, NumImages);
 end
 for i=1:NumImages
     imgname = [imPath filesep filearray(i).name]; % get image name
     if(size(I,3)==3)
-%         ImSeq(:,:,i,:) = imread(imgname); % load image
-        ImSeq(:,:,i) = rgb2gray(imread(imgname));
+        ImSeq(:,:,i,:) = imread(imgname); % load image
     else
         ImSeq(:,:,i) = imread(imgname);
     end
@@ -41,10 +40,10 @@ disp(' ... OK!');
 
 %% Read the image, and extract sift 
 % I = single(rgb2gray(imread('img009.bmp')));
-imshow(ImSeq(:,:,1), []);
+imshow(I, []);
 
 % Use functions from http://www.vlfeat.org/ toolbox
-[F, D] = vl_sift(single(ImSeq(:,:,1))); %Extract sift detectors and descriptors
+[F, D] = vl_sift(single(I)); %Extract sift detectors and descriptors
 vl_plotsiftdescriptor(D, F); %Plot descriptors in the image
 
 %%Build set of keypoints
@@ -59,7 +58,7 @@ end
 O_0 = Theta;
 % Visualize keypoints in the window
 figure;
-imshow(ImSeq(:,:,1), []);
+imshow(I, []);
 hold on;
 rectangle('Position', win0, 'EdgeColor','r');
 % [Dw, Fw] = split_set(Theta);
@@ -81,23 +80,22 @@ for k = 2:NumImages
         Vk(i).v = D(:,i);
     end
 
-
+    mu_max = -100;
     %Window search
-    mu_max = -Inf;
-    for i = -5:2:5
-        for j = -5:2:5
+    for i = -30:2:30
+        disp(i);
+        for j = -30:2:30
             win = [Wkm1(1)+i,Wkm1(2)+j,Wkm1(3),Wkm1(4)];
             mu = motion_score(win, Okm1, B, Wkm1, Vk);
+%             disp(mu);
             if(mu > mu_max)
                mu_max = mu;
                Wk = win;
-               fprintf('.');
+               disp('Higher');
             end
         end
     end
     Wkm1 = Wk;
-    
-    disp('Window found');
     
     figure(3);
     imshow(ImSeq(:,:,k),[]);
@@ -110,14 +108,14 @@ for k = 2:NumImages
     [Theta, ~] = sift_in_window(Wk, Vk); 
     Fl = filter_operator(Theta, Okm1, B);
 
-    disp('Filter found');
 %% Step 3 : Find Appearance Object Model (Ok)
     
+    [v_Okm1, ~] = split_set(Okm1);
+%     [v_Fl, ~] = split_set(Fl);
+%     matches = vl_ubcmatch(v_Okm1, v_Fl);
     Ok = or_set(Okm1, Fl);
 %     pause;
     drawnow;
     Okm1 = Ok;
-    
-    disp('Model found');
     
 end
